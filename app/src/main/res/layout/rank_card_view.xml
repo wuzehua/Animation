@@ -64,7 +64,7 @@
                     android:layout_gravity="center_vertical"
                     app:lottie_autoPlay="false"
                     app:lottie_loop="false"
-                    android:src="favourite.json"
+                    app:lottie_fileName="favourite.json"
             />
 
         </LinearLayout>
