@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_fragment_demo.*
 
 class FragmentDemo : AppCompatActivity() {
 
-    val titles = arrayOf("1","2","3")
+    private val titles = arrayListOf("热搜榜","测试栏")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,36 +25,39 @@ class FragmentDemo : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
-        for(i in 0 until 3)
+
+        val fragmentLists = ArrayList<Fragment>()
+
+        for(i in 0 until 2)
         {
-            tl_tabLayout.addTab(tl_tabLayout.newTab().setText(titles[i]))
+            fragmentLists.add(RankListFragment())
         }
 
         tl_tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener
         {
-            override fun onTabReselected(p0: TabLayout.Tab?) {}
-
-            override fun onTabUnselected(p0: TabLayout.Tab?) {}
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab == null)
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                if(tab == null)
                     return
+                vp_pageViewer.currentItem = tab.position
+            }
 
-                val position = tab.position
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
 
-                val manager = supportFragmentManager
-                val transaction = manager.beginTransaction()
-                transaction.replace(R.id.fl_frameLayout, TextFragment.newInstance("Fragment ${position + 1}"))
-                transaction.commit()
-
+            override fun onTabSelected(p0: TabLayout.Tab?) {
             }
 
         })
 
-        val manager = supportFragmentManager
-        val transaction = manager.beginTransaction()
-        transaction.add(R.id.fl_frameLayout, TextFragment.newInstance("Fragment 1"))
-        transaction.commit()
+        val adapter = FragmentDemoPagerAdapter(supportFragmentManager)
+        adapter.setFragments(fragmentLists)
+        adapter.setPageTitles(titles)
+
+        vp_pageViewer.adapter = adapter
+        tl_tabLayout.setupWithViewPager(vp_pageViewer)
+
+        tl_tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
