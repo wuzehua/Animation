@@ -11,7 +11,7 @@
     <color name="hotBackgroundColor">#B10511</color>
     <color name="newBackgroundColor">#4C3283</color>
     <color name="lightTitleColor">#181818</color>
-    <color name="lightNormalNoColor">#1F1F1F</color>
+    <color name="lightNormalNoColor">#FF1F1F1F</color>
     <color name="lightBackgroundColor">#C5C5C5</color>
 
 </resources>

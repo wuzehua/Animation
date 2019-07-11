@@ -2,36 +2,31 @@ package com.example.animationdemo
 
 enum class Type{ Hot, New, None}
 
+val TEXT_ONLY = 0
+val CARD_VIEW = 1
+
 class RankData
 {
     private var type: Type
     private var title: String
     private var number: Int
     private var favorite: Boolean
+    private var viewType: Int
 
-    constructor(type: Type, title: String, number: Int)
+    constructor(type: Type, title: String, number: Int, viewType: Int)
     {
         this.type = type
         this.number = number
         this.title = title
         favorite = false
+        this.viewType = viewType
     }
 
-    constructor(title: String, number: Int)
-    {
-        this.type = Type.None
-        this.title = title
-        this.number = number
-        favorite = false
-    }
+    constructor(type: Type, title: String, number: Int): this(type, title, number, TEXT_ONLY)
 
-    constructor(title: String)
-    {
-        this.type = Type.None
-        this.title = title
-        this.number = 0
-        favorite = false
-    }
+    constructor(title: String, number: Int):this(Type.None,title,number)
+
+    constructor(title: String):this(title,0)
 
     fun getType(): Type
     {
@@ -71,5 +66,10 @@ class RankData
     fun setFavorite(value: Boolean)
     {
         favorite = value
+    }
+
+    fun getViewType(): Int
+    {
+        return viewType
     }
 }

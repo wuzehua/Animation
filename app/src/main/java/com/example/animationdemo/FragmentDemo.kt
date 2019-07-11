@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_fragment_demo.*
 
 class FragmentDemo : AppCompatActivity() {
 
-    private val titles = arrayListOf("热搜榜","测试栏")
+    private val titles = arrayListOf("测试栏","热搜榜")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +28,10 @@ class FragmentDemo : AppCompatActivity() {
 
         val fragmentLists = ArrayList<Fragment>()
 
-        for(i in 0 until 2)
-        {
-            fragmentLists.add(RankListFragment())
-        }
+        fragmentLists.add(RankListCardFragment())
+        fragmentLists.add(RankListFragment())
+
+
 
         tl_tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener
         {
